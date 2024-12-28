@@ -28,10 +28,10 @@ data EquityQuoteResponse = EquityQuoteResponse
   , asset_type :: String
   , name :: String
   , currency :: String
-  , last_price :: Float
-  , open :: Float
-  , high :: Float
-  , low :: Float
+  , last_price :: Double
+  , open :: Double
+  , high :: Double
+  , low :: Double
   , volume :: Int
   }
   deriving (Show, Generic)

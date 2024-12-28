@@ -1,6 +1,9 @@
 cabal-version:      3.0
 name:               openbb-api
 version:            0.1.0.0
+description:
+    TBA
+bug-reports:        https://github.com/bratfizyk/stooq-api/issues
 license:            MIT
 license-file:       LICENSE
 author:             Alojzy Leszcz
@@ -9,12 +12,16 @@ category:           Web
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
 
+Source-repository head
+  type:     git
+  location: https://github.com/bratfizyk/openbb-api
+
 common warnings
     ghc-options: -Wall
 
 library
     import:           warnings
-    exposed-modules:  OpenBBAPI
+    exposed-modules:  Web.Data.OpenBB.API
 
     build-depends:    base           >= 4.18   && < 4.19,
                       aeson          >= 2.2.3  && < 2.3,

@@ -5,7 +5,7 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module OpenBBAPI where
+module Web.Data.OpenBB.API where
 
 import Data.Aeson (FromJSON)
 import Data.List (intercalate)

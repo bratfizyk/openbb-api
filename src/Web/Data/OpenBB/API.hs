@@ -28,7 +28,8 @@ data EquityQuoteResponse = EquityQuoteResponse
   , asset_type :: String
   , name :: String
   , currency :: String
-  , last_price :: Double
+  , last_price :: Maybe Double
+  , prev_close :: Double
   , open :: Double
   , high :: Double
   , low :: Double

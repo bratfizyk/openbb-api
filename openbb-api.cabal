@@ -22,7 +22,7 @@ library
     import:           warnings
     exposed-modules:  Web.Data.OpenBB.API
 
-    build-depends:    base           >= 4.21   && < 4.22,
+    build-depends:    base           >= 4.20   && < 4.21,
                       aeson          >= 2.2.3  && < 2.3,
                       http-client    >= 0.7.17 && < 0.8,
                       servant        >= 0.20.1 && < 0.21,

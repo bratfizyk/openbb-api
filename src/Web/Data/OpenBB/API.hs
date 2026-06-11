@@ -26,7 +26,7 @@ instance ToHttpApiData [Ticker] where
 data EquityQuoteResponse = EquityQuoteResponse
   { symbol :: String
   , asset_type :: String
-  , name :: String
+  , name :: Maybe String
   , currency :: String
   , last_price :: Maybe Double
   , prev_close :: Double

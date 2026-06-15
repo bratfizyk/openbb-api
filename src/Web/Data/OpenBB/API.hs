@@ -43,9 +43,6 @@ import Network.HTTP.Client (newManager, defaultManagerSettings)
 import Servant.API (ToHttpApiData(toUrlPiece), JSON, Required, QueryParam', type (:>), Get)
 import Servant.Client (client, mkClientEnv, runClientM, ClientM, BaseUrl(BaseUrl), Scheme(Http))
 
--- | The name of the data provider (e.g., "yfinance", "polygon").
-type Provider = String
-
 -- | A stock ticker symbol (e.g., "AAPL", "MSFT").
 type Ticker = String
 
@@ -53,15 +50,24 @@ instance ToHttpApiData [Ticker] where
   toUrlPiece :: [Ticker] -> Text
   toUrlPiece = pack . intercalate ","
 
+-- | The name of the data provider.
+data Provider = YahooFinance | TMX
+  deriving (Show, Read, Eq, Generic)
+
+instance ToHttpApiData Provider where
+  toUrlPiece :: Provider -> Text
+  toUrlPiece YahooFinance = pack "yfinance"
+  toUrlPiece TMX = pack "tmx"
+
 {-|
   Represents a single equity quote response from the OpenBB platform.
   Contains market data such as current price, volume, and intraday highs/lows.
 -}
 data EquityQuoteResponse = EquityQuoteResponse
   { symbol :: String
-  , asset_type :: String
+  , asset_type :: Maybe String
   , name :: Maybe String
-  , currency :: String
+  , currency :: Maybe String
   , last_price :: Maybe Double
   , prev_close :: Double
   , bid :: Maybe Double
@@ -69,7 +75,7 @@ data EquityQuoteResponse = EquityQuoteResponse
   , open :: Double
   , high :: Double
   , low :: Double
-  , volume :: Int
+  , volume :: Maybe Int
   }
   deriving (Show, Generic)
 
@@ -127,8 +133,8 @@ equity = client api
   equityQuote ["AAPL", "GOOGL"]
   @
 -}
-equityQuote :: [Ticker] -> ClientM (ApiResult EquityQuoteResponse)
-equityQuote tickers = do equity "yfinance" tickers
+equityQuote :: Provider -> [Ticker] -> ClientM (ApiResult EquityQuoteResponse)
+equityQuote = equity
 
 {-|
   Runs a 'ClientM' request in the 'IO' monad.

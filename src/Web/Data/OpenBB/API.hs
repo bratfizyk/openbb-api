@@ -64,6 +64,8 @@ data EquityQuoteResponse = EquityQuoteResponse
   , currency :: String
   , last_price :: Maybe Double
   , prev_close :: Double
+  , bid :: Maybe Double
+  , ask :: Maybe Double
   , open :: Double
   , high :: Double
   , low :: Double

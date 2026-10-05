@@ -1,6 +1,6 @@
 cabal-version:      3.0
 name:               openbb-api
-version:            0.1.3.1
+version:            0.2.0.0
 description:        A wrapper around openBB REST API
 bug-reports:        https://github.com/bratfizyk/stooq-api/issues
 license:            MIT
@@ -20,13 +20,15 @@ common warnings
 
 library
     import:           warnings
-    exposed-modules:  Web.Data.OpenBB.API
-
+    exposed-modules:  Web.Data.OpenBB.API,
+                      Web.Data.OpenBB.Types
+    other-modules:    Web.Data.OpenBB.Servant
     build-depends:    base           >= 4.20   && < 4.21,
                       aeson          >= 2.2.3  && < 2.3,
                       http-client    >= 0.7.17 && < 0.8,
                       servant        >= 0.20.1 && < 0.21,
                       servant-client >= 0.20   && < 0.21,
-                      text           >= 2.1    && < 2.2
+                      text           >= 2.1    && < 2.2,
+                      time           >= 1.12   && < 1.13
     hs-source-dirs:   src
     default-language: Haskell2010
